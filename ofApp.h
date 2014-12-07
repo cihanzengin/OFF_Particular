@@ -3,7 +3,6 @@
 #include "ofMain.h"
 
 class ofApp : public ofBaseApp{
-
 	public:
 		void setup();
 		void update();
@@ -18,7 +17,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-
+    Particle p;
+    ofFbo fbo;
+    float history;
+    float time0;
 };
 
 class Params {
@@ -32,5 +34,4 @@ public:
 };
 
 extern Params param; // Decleration
-
 
