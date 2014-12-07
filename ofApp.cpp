@@ -1,19 +1,5 @@
 #include "ofApp.h"
 
-class Particle {
-public:
-    Particle();
-    void setup();
-    void update( float dt );
-    void draw();
-    ofPoint pos;
-    ofPoint vel;
-    float time;
-    float lifeTime;
-    bool live;
-    
-};
-
 
 Params param;        //Definition of global variable
 void Params::setup() {
@@ -35,7 +21,8 @@ ofPoint randomPointInCircle( float maxRad ){
     float angle = ofRandom( 0, M_TWO_PI );
     pnt.x = cos( angle ) * rad;
     pnt.y = sin( angle ) * rad;
-    return pnt; }
+    return pnt;
+}
 
 
 void Particle::setup() {
@@ -108,7 +95,7 @@ void ofApp::update(){
         p.setup(); }
     //Update the particle
     p.update( dt );
-   
+    
 }
 
 //--------------------------------------------------------------
@@ -161,20 +148,20 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+void ofApp::dragEvent(ofDragInfo dragInfo){
+    
 }
