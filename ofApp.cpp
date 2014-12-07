@@ -1,22 +1,11 @@
 #include "ofApp.h"
 
-//Cihan Bitch 
-
 class Particle {
 public:
     Particle();
     void setup();
     void update( float dt );
     void draw();
-    //Class constructor
-    //Start particle
-    //Recalculate physics
-    //Draw particle
-    //Position
-    //Velocity
-    //Time of living
-    //Allowed lifetime
-    //Is particle live
     ofPoint pos;
     ofPoint vel;
     float time;
@@ -32,11 +21,13 @@ void Params::setup() {
     eRad = 50;
     velRad = 200;
     lifeTime = 1.0;
-    rotate = 90; }
+    rotate = 90;
+}
 
 Particle::Particle() {
     live = false;
 }
+
 
 ofPoint randomPointInCircle( float maxRad ){
     ofPoint pnt;
@@ -46,7 +37,7 @@ ofPoint randomPointInCircle( float maxRad ){
     pnt.y = sin( angle ) * rad;
     return pnt; }
 
-// ---- here we will go to universe!!
+
 void Particle::setup() {
     pos = param.eCenter + randomPointInCircle( param.eRad );
     vel = randomPointInCircle( param.velRad );
@@ -69,6 +60,7 @@ void Particle::update( float dt ){
     } }
 
 
+
 void Particle::draw(){
     if ( live ) {
         //Compute size
@@ -87,17 +79,8 @@ void Particle::draw(){
 
 
 
-
-
-
-
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::update(){
     ofSetFrameRate( 60 );    //Set screen frame rate
     //Allocate drawing buffer
     int w = ofGetWidth();
@@ -111,6 +94,10 @@ void ofApp::update(){
     param.setup();          //Global parameters
     history = 0.995;
     time0 = ofGetElapsedTimef();
+}
+
+//--------------------------------------------------------------
+void ofApp::update(){
     
     //Compute dt
     float time = ofGetElapsedTimef();
@@ -121,6 +108,7 @@ void ofApp::update(){
         p.setup(); }
     //Update the particle
     p.update( dt );
+   
 }
 
 //--------------------------------------------------------------
@@ -128,21 +116,21 @@ void ofApp::draw(){
     ofBackground( 255, 255, 255 );  //Set white background
     //1. Drawing to buffer
     fbo.begin();
-    
+    //Draw semi-transparent white rectangle
+    //to slightly clearing a buffer (depends on history value)
     ofEnableAlphaBlending();         //Enable transparency
     float alpha = (1-history) * 255;
     ofSetColor( 255, 255, 255, alpha );
     ofFill();
     ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
-      ofDisableAlphaBlending();
-    
+    ofDisableAlphaBlending();
+    //Draw the particle
     ofFill();
     p.draw();
-    
     fbo.end();
-    
-    ofSetColor(255, 255, 255);
-    fbo.draw(0, 0);
+    //2. Draw buffer on the screen
+    ofSetColor( 255, 255, 255 );
+    fbo.draw( 0, 0 );
     
 }
 
